@@ -29,10 +29,12 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
     dpkg -i kapacitor_${KAPACITOR_VERSION}_${ARCH}.deb && \
     rm -f kapacitor_${KAPACITOR_VERSION}_${ARCH}.deb*
 COPY kapacitor.conf /etc/kapacitor/kapacitor.conf
+COPY mirror_udf.tick /tmp/mirror_udf.tick
 
 EXPOSE 9092
 
 VOLUME /var/lib/kapacitor
+VOLUME /tmp
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
